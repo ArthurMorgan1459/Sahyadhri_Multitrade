@@ -22,8 +22,8 @@ body.menu-open { overflow: hidden; }
    NAVBAR (same as home)
 ======================== */
 .navbar-container {
-    position: fixed;
-    top: 16px;
+    position: absolute;
+    top: 30px;
     left: 0;
     width: 100%;
     display: flex;
