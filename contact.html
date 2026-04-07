@@ -13,28 +13,45 @@
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar-container">
     <div class="navbar-pill">
+
         <div class="logo">
             <img src="images/sahyadhri.png" alt="Sahyadhri Logo">
         </div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html" onclick="closeMenu()">Home</a></li>
-            <li><a href="index.html#about" onclick="closeMenu()">About us</a></li>
-            <li><a href="services.html" onclick="closeMenu()">Services</a></li>
-            <li><a href="#awards" onclick="closeMenu()">Awards</a></li>
-            <li><a href="career.html" onclick="closeMenu()">Career</a></li>
-            <li class="mobile-contact-li">
-                <a href="contact.html" class="mobile-contact-link active-mobile" onclick="closeMenu()">Contact us</a>
-            </li>
+
+        <!-- Desktop links (hidden on mobile) -->
+        <ul class="desktop-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="career.html">Career</a></li>
         </ul>
-        <a href="contact.html" class="contact-btn desktop-contact active-nav">Contact us</a>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+
+        <a href="contact.html" class="contact-btn">Contact us</a>
+
+        <!-- Hamburger (visible only on mobile) -->
+        <button class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
+
     </div>
-    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
 </nav>
+
+<!-- ======= MOBILE DRAWER (completely separate from navbar) ======= -->
+<div class="mobile-drawer" id="mobileDrawer">
+    <button class="drawer-close" id="drawerClose">✕</button>
+    <ul>
+        <li><a href="index.html" onclick="closeDrawer()">Home</a></li>
+        <li><a href="index.html#about" onclick="closeDrawer()">About us</a></li>
+        <li><a href="services.html" onclick="closeDrawer()">Services</a></li>
+        <li><a href="career.html" onclick="closeDrawer()">Career</a></li>
+        <li><a href="contact.html">Contact us</a></li>
+    </ul>
+</div>
+
+<!-- Dark backdrop -->
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
 
 <!-- ===== HERO ===== -->
 <section class="contact-hero">
@@ -43,7 +60,7 @@
         <div class="yellow-bar"></div>
     </div>
     <div class="hero-right">
-        <img src="images/contact-illustration.png" alt="Contact Illustration" class="hero-illustration">
+        <img src="images/contact_us_banner.png" alt="Contact Illustration" class="hero-illustration">
     </div>
 </section>
 
@@ -56,7 +73,7 @@
             <h2>Contact Address</h2>
 
             <div class="addr-item">
-                <span class="addr-icon"><i class="fa-solid fa-location-dot"></i></span>
+                <span class="addr-icon"></span>
                 <p>Office No 115, Plot No 84, Vardhaman Chamber,<br>
                 Wing B Sector – 17, Vashi, Navi Mumbai,<br>
                 Maharashtra – 400703</p>
@@ -65,7 +82,6 @@
             <div class="addr-mail">
                 <p class="mail-label">For any general query mail us at</p>
                 <a href="mailto:operation@smtpl.net.in" class="mail-link">
-                    <i class="fa-regular fa-envelope"></i>
                     operation@smtpl.net.in
                 </a>
             </div>
@@ -74,13 +90,13 @@
                 <div class="phone-item">
                     <p class="person-name">Mr. Ajay Shirshad</p>
                     <a href="tel:+918108911104" class="phone-link">
-                        <i class="fa-solid fa-phone"></i> +91 81089 11104
+                     +91 81089 11104
                     </a>
                 </div>
                 <div class="phone-item">
                     <p class="person-name">Mr. Sachin Panmand</p>
                     <a href="tel:+918108044454" class="phone-link">
-                        <i class="fa-solid fa-phone"></i> +91 81080 44454
+                     +91 81080 44454
                     </a>
                 </div>
             </div>
@@ -124,10 +140,10 @@
         <div class="footer-main">
             <div class="footer-col brand">
                 <div class="brand-header">
-                    <img src="logo.png" alt="Sahyadhri Logo" class="f-logo">
-                    <h2 class="f-title">SAHYADHRI<br>MULTITRADE PVT. LTD.</h2>
+                    <img src="images/sahyadhri.png" alt="Sahyadhri Logo" class="f-logo">
+                    <h2 class="f-title">SAHYADHRI MULTITRADE PVT. LTD.</h2>
                 </div>
-                <p class="f-desc">Sahyadhri Multitrade Pvt. Ltd. is a trusted name in supply chain solutions, scrap trading, and logistics services. With over 30 years of experience, we are committed to delivering reliable, efficient, and customer-focused solutions across India.</p>
+                <p class="f-desc">Sahyadhri Multitrade Pvt. Ltd. is a trusted name in the scrap industry, providing reliable solutions for scrap sourcing, processing, and integrated supply chain operations, backed by efficient and customer-focused service across India.</p>
             </div>
             <div class="footer-col links">
                 <h3>Quick Links</h3>
@@ -135,7 +151,6 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="index.html#about">About us</a></li>
                     <li><a href="services.html">Services</a></li>
-                    <li><a href="#awards">Awards</a></li>
                     <li><a href="career.html">Career</a></li>
                 </ul>
             </div>
@@ -163,18 +178,38 @@
 </footer>
 
 <script>
-function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-    document.getElementById('hamburger').classList.toggle('active');
-    document.getElementById('menuOverlay').classList.toggle('active');
-    document.body.classList.toggle('menu-open');
+// ── MOBILE DRAWER ──────────────────────────────────────
+var drawer   = document.getElementById('mobileDrawer');
+var backdrop = document.getElementById('drawerBackdrop');
+var burger   = document.getElementById('hamburger');
+var closeBtn = document.getElementById('drawerClose');
+
+burger.addEventListener('click', function() {
+    drawer.classList.add('open');
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+});
+
+function closeDrawer() {
+    drawer.classList.remove('open');
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
 }
-function closeMenu() {
-    document.getElementById('navLinks').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('active');
-    document.getElementById('menuOverlay').classList.remove('active');
-    document.body.classList.remove('menu-open');
-}
+
+closeBtn.addEventListener('click', closeDrawer);
+
+// Anchor links inside drawer — close then scroll
+drawer.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = this.getAttribute('href');
+        closeDrawer();
+        setTimeout(function() {
+            var el = target === '#' ? document.body : document.querySelector(target);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+    });
+});
 
 function handleSubmit(e) {
     e.preventDefault();

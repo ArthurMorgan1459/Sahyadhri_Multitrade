@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Careers – Sahyadhri Multitrade Pvt. Ltd.</title>
-    <link rel="stylesheet" href="career.css">
+    <title>Contact Us – Sahyadhri Multitrade Pvt. Ltd.</title>
+    <link rel="stylesheet" href="contact.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
@@ -20,8 +20,8 @@
 
         <!-- Desktop links (hidden on mobile) -->
         <ul class="desktop-nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#about">About us</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="home.html#about">About us</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="career.html" class="active">Career</a></li>
         </ul>
@@ -42,8 +42,8 @@
 <div class="mobile-drawer" id="mobileDrawer">
     <button class="drawer-close" id="drawerClose">✕</button>
     <ul>
-        <li><a href="index.html" onclick="closeDrawer()">Home</a></li>
-        <li><a href="index.html#about" onclick="closeDrawer()">About us</a></li>
+        <li><a href="home.html" onclick="closeDrawer()">Home</a></li>
+        <li><a href="home.html#about" onclick="closeDrawer()">About us</a></li>
         <li><a href="services.html" onclick="closeDrawer()">Services</a></li>
         <li><a href="career.html" onclick="closeDrawer()">Career</a></li>
         <li><a href="contact.html">Contact us</a></li>
@@ -54,52 +54,78 @@
 <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
 
 <!-- ===== HERO ===== -->
-<section class="career-hero">
+<section class="contact-hero">
     <div class="hero-left">
-        <h1 class="hero-title">CAREERS</h1>
+        <h1 class="hero-title">CONTACT US</h1>
         <div class="yellow-bar"></div>
     </div>
     <div class="hero-right">
-        <img src="images/career_banner.png" alt="Careers Illustration" class="hero-illustration">
+        <img src="images/contact_us_banner.png" alt="Contact Illustration" class="hero-illustration">
     </div>
 </section>
 
-<!-- ===== APPLICATION FORM ===== -->
-<section class="form-section">
-    <div class="form-card">
+<!-- ===== CONTACT CARD ===== -->
+<section class="contact-section">
+    <div class="contact-card">
 
-        <div class="form-image">
-            <img src="images/career_container.png" alt="Career at Sahyadhri">
+        <!-- Left: Address -->
+        <div class="address-panel">
+            <h2>Contact Address</h2>
+
+            <div class="addr-item">
+                <span class="addr-icon"><i class="fa-solid fa-location-dot"></i></span>
+                <p>Office No 115, Plot No 84, Vardhaman Chamber,<br>
+                Wing B Sector – 17, Vashi, Navi Mumbai,<br>
+                Maharashtra – 400703</p>
+            </div>
+
+            <div class="addr-mail">
+                <p class="mail-label">For any general query mail us at</p>
+                <a href="mailto:operation@smtpl.net.in" class="mail-link">
+                    <i class="fa-regular fa-envelope"></i>
+                    operation@smtpl.net.in
+                </a>
+            </div>
+
+            <div class="addr-phones">
+                <div class="phone-item">
+                    <p class="person-name">Mr. Ajay Shirshad</p>
+                    <a href="tel:+918108911104" class="phone-link">
+                        <i class="fa-solid fa-phone"></i> +91 81089 11104
+                    </a>
+                </div>
+                <div class="phone-item">
+                    <p class="person-name">Mr. Sachin Panmand</p>
+                    <a href="tel:+918108044454" class="phone-link">
+                        <i class="fa-solid fa-phone"></i> +91 81080 44454
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <div class="form-divider"></div>
+        <!-- Divider -->
+        <div class="card-divider"></div>
 
-        <div class="form-area">
-            <form class="apply-form" onsubmit="handleSubmit(event)">
+        <!-- Right: Form -->
+        <div class="form-panel">
+            <h2>Get in Touch</h2>
+
+            <form class="contact-form" onsubmit="handleSubmit(event)">
 
                 <div class="form-row full">
                     <input type="text" placeholder="Full Name" required>
                 </div>
 
                 <div class="form-row split">
-                    <input type="email" placeholder="Email ID" required>
                     <input type="tel" placeholder="Mobile Number" required>
+                    <input type="email" placeholder="Email ID" required>
                 </div>
 
                 <div class="form-row full">
-                    <textarea placeholder="Message..." rows="4"></textarea>
+                    <textarea placeholder="Message..." rows="5"></textarea>
                 </div>
 
-                <div class="form-row upload-row">
-                    <label class="upload-label">
-                        <span class="upload-text">Upload Resume</span>
-                        <label class="file-btn" for="resumeInput">Choose File</label>
-                        <input type="file" id="resumeInput" accept=".pdf,.doc,.docx" onchange="showFileName(this)">
-                        <span class="file-name" id="fileName">No file chosen</span>
-                    </label>
-                </div>
-
-                <div class="form-row full">
+                <div class="form-row submit-row">
                     <button type="submit" class="submit-btn">SUBMIT</button>
                 </div>
 
@@ -115,10 +141,10 @@
         <div class="footer-main">
             <div class="footer-col brand">
                 <div class="brand-header">
-                    <img src="images/sahyadhri.png" alt="Sahyadhri Logo" class="f-logo">
+                    <img src="logo.png" alt="Sahyadhri Logo" class="f-logo">
                     <h2 class="f-title">SAHYADHRI MULTITRADE PVT. LTD.</h2>
                 </div>
-                <p class="f-desc">Sahyadhri Multitrade Pvt. Ltd. is a trusted name in the scrap industry, providing reliable solutions for scrap sourcing, processing, and integrated supply chain operations, backed by efficient and customer-focused service across India.</p>
+                <p class="f-desc">Sahyadhri Multitrade Pvt. Ltd. is a trusted name in supply chain solutions, scrap trading, and logistics services. With over 30 years of experience, we are committed to delivering reliable, efficient, and customer-focused solutions across India.</p>
             </div>
             <div class="footer-col links">
                 <h3>Quick Links</h3>
@@ -186,17 +212,10 @@ drawer.querySelectorAll('a[href^="#"]').forEach(function(a) {
     });
 });
 
-// ===== FILE NAME DISPLAY =====
-function showFileName(input) {
-    const label = document.getElementById('fileName');
-    label.textContent = input.files.length ? input.files[0].name : 'No file chosen';
-}
-
-// ===== FORM SUBMIT =====
 function handleSubmit(e) {
     e.preventDefault();
     const btn = e.target.querySelector('.submit-btn');
-    btn.textContent = '✓ Application Submitted!';
+    btn.textContent = '✓ Message Sent!';
     btn.style.background = '#28a745';
     btn.disabled = true;
     setTimeout(() => {
@@ -204,7 +223,6 @@ function handleSubmit(e) {
         btn.style.background = '';
         btn.disabled = false;
         e.target.reset();
-        document.getElementById('fileName').textContent = 'No file chosen';
     }, 3500);
 }
 </script>

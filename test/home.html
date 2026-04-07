@@ -10,45 +10,62 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- ======= NAVBAR ======= -->
 <nav class="navbar-container">
     <div class="navbar-pill">
+
         <div class="logo">
             <img src="images/sahyadhri.png" alt="Sahyadhri Logo">
         </div>
 
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#" class="active" onclick="closeMenu()">Home</a></li>
-            <li><a href="#about" onclick="closeMenu()">About us</a></li>
-            <li><a href="#services" onclick="closeMenu()">Services</a></li>
-            <li><a href="#awards" onclick="closeMenu()">Awards</a></li>
-            <li><a href="#career" onclick="closeMenu()">Career</a></li>
-            <!-- Mobile-only Contact button inside menu -->
-            <li class="mobile-contact-li"><a href="#contact" class="mobile-contact-link" onclick="closeMenu()">Contact us</a></li>
+        <!-- Desktop links (hidden on mobile) -->
+        <ul class="desktop-nav">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#about">About us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#career">Career</a></li>
         </ul>
 
-        <a href="#contact" class="contact-btn desktop-contact">Contact us</a>
+        <a href="contact.html" class="contact-btn">Contact us</a>
 
-        <!-- Hamburger Button -->
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+        <!-- Hamburger (visible only on mobile) -->
+        <button class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
-    </div>
 
-    <!-- Mobile overlay background -->
-    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    </div>
 </nav>
 
-<!-- HERO -->
+<!-- ======= MOBILE DRAWER (completely separate from navbar) ======= -->
+<div class="mobile-drawer" id="mobileDrawer">
+    <button class="drawer-close" id="drawerClose">✕</button>
+    <ul>
+        <li><a href="#" onclick="closeDrawer()">Home</a></li>
+        <li><a href="#about" onclick="closeDrawer()">About us</a></li>
+        <li><a href="#services" onclick="closeDrawer()">Services</a></li>
+        <li><a href="#career" onclick="closeDrawer()">Career</a></li>
+        <li><a href="contact.html">Contact us</a></li>
+    </ul>
+</div>
+
+<!-- Dark backdrop -->
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+
+
+<!-- ======= HERO ======= -->
 <header class="hero-section">
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="images/Hero_section.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
     <div class="hero-content">
         <h1 class="main-title">SAHYADHRI<br>MULTITRADE PVT. LTD.</h1>
     </div>
 </header>
 
-<!-- ABOUT -->
+<!-- ======= ABOUT ======= -->
 <section id="about" class="about-section">
     <div class="about-container">
         <div class="about-content">
@@ -64,39 +81,39 @@
         </div>
         <div class="about-images">
             <div class="image-box box-1">
-                <img src="images/istockphoto-2157040201-612x612.jpg" alt="Logistics Truck">
+                <img src="images/About_us_1.jpg" alt="Logistics Truck">
             </div>
             <div class="image-box box-2">
-                <img src="images/Busheling-1-1024x768-1.jpg" alt="Scrap Metal">
+                <img src="images/ABout_us_2.jpg" alt="Scrap Metal">
             </div>
         </div>
     </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ======= SERVICES ======= -->
 <section id="services" class="services-section bg-services">
     <div class="services-container">
         <div class="services-grid">
-            <div class="grid-item"><img src="images/white-truck-crossing-bridge-sunset-urban-logistics-motion_169016-69995.jpg" alt="Logistics"></div>
-            <div class="grid-item"><img src="images/images (1).jpeg" alt="Sorting"></div>
-            <div class="grid-item"><img src="images/62327-16198116.jpg" alt="Processing"></div>
-            <div class="grid-item"><img src="images/Stacks-of-recycled-aluminum-blocks.webp" alt="Storage"></div>
+            <div class="grid-item"><img src="images/Service1.jpg" alt="Logistics"></div>
+            <div class="grid-item"><img src="images/Service2.jpeg" alt="Sorting"></div>
+            <div class="grid-item"><img src="images/Service3.jpg" alt="Processing"></div>
+            <div class="grid-item"><img src="images/Service4.jpg" alt="Storage"></div>
         </div>
         <div class="services-content">
             <h2 class="services-header">SERVICES</h2>
             <div class="yellow-line"></div>
-            <p>With over 30 years of expertise, Sahyadhri Multitrade Pvt Ltd provides end-to-end management for the scrap industry. We specialize in transforming industrial waste into valuable resources through efficient, time-sensitive logistics.</p>
+            <p>With over 30 years of expertise, Sahyadhri Multitrade Pvt Ltd provides end-to-end management for the scrap industry.</p>
             <ul class="services-list">
                 <li><strong>Integrated Scrap Supply Chain:</strong> Expert management of GTA, PTL, and FTL movements specifically for scrap materials.</li>
                 <li><strong>Professional Sorting & Grading:</strong> Systematic separation of ferrous, non-ferrous, and TMT scrap to ensure high-quality standards.</li>
                 <li><strong>Advanced Processing:</strong> Material preparation including cleaning and shredding to support sustainable manufacturing.</li>
             </ul>
-            <a href="#" class="know-more-btn">Know More</a>
+            <a href="services.html" class="know-more-btn">Know More</a>
         </div>
     </div>
 </section>
 
-<!-- CAREER -->
+<!-- ======= CAREER ======= -->
 <section id="career" class="career-section">
     <div class="career-container">
         <div class="career-wrapper">
@@ -104,16 +121,16 @@
                 <h2 class="career-title">CAREERS</h2>
                 <div class="yellow-line"></div>
                 <p>Be part of a team dedicated to providing time-critical logistics and sustainable scrap solutions</p>
-                <a href="#contact" class="apply-btn">Apply Now!</a>
+                <a href="career.html" class="apply-btn">Apply Now!</a>
             </div>
             <div class="career-image">
-                <img src="images/1024573_OJXL4S0.jpg" alt="Career Opportunities">
+                <img src="images/Career.jpg" alt="Career Opportunities">
             </div>
         </div>
     </div>
 </section>
 
-<!-- CLIENTS -->
+<!-- ======= CLIENTS ======= -->
 <section id="clients" class="section-header">
     <h2 class="section-title">OUR CLIENTS</h2>
     <div class="yellow-underline"></div>
@@ -123,16 +140,16 @@
         <div class="slider-window">
             <div class="slider-track" id="sliderTrack">
                 <div class="slide">
-                    <img src="images/JSW_Group_logo.svg.png" alt="JSW" class="client-logo">
-                    <img src="images/images (3).png" alt="Metaroll" class="client-logo">
-                    <img src="images/kaalika-international-scaled.png" alt="Kaalika" class="client-logo">
-                    <img src="images/icon_logo_2022_new.png" alt="Icon Steel" class="client-logo">
+                    <img src="images/tata_steel.png" alt="Tata Steel" class="client-logo">
+                    <img src="images/jsw.png" alt="JSW" class="client-logo">
+                    <img src="images/metaroll.png" alt="Metaroll" class="client-logo">
+                    <img src="images/kaalika.png" alt="Kaalika" class="client-logo">
                 </div>
                 <div class="slide">
-                    <img src="client5.png" alt="Client 5" class="client-logo">
-                    <img src="client6.png" alt="Client 6" class="client-logo">
-                    <img src="client7.png" alt="Client 7" class="client-logo">
-                    <img src="client8.png" alt="Client 8" class="client-logo">
+                    <img src="images/icon_steel.png" alt="Icon Steel" class="client-logo">
+                    <img src="images/srj.png" alt="SRJ" class="client-logo">
+                    <img src="images/gaurdian.png" alt="Guardian" class="client-logo">
+                    <img src="images/mukand_bajaj.png" alt="Mukand Bajaj" class="client-logo">
                 </div>
             </div>
         </div>
@@ -144,30 +161,29 @@
     </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ======= FOOTER ======= -->
 <footer class="footer-outer-wrapper">
     <div class="footer-container">
         <div class="footer-main">
             <div class="footer-col brand">
                 <div class="brand-header">
-                    <img src="logo.png" alt="Sahyadhri Logo" class="f-logo">
-                    <h2 class="f-title">SAHYADHRI<br>MULTITRADE PVT. LTD.</h2>
+                    <img src="images/sahyadhri.png" alt="Sahyadhri Logo" class="f-logo">
+                    <h2 class="f-title">SAHYADHRI MULTITRADE PVT. LTD.</h2>
                 </div>
                 <p class="f-desc">Sahyadhri Multitrade Pvt. Ltd. is a trusted name in supply chain solutions, scrap trading, and logistics services. With over 30 years of experience, we are committed to delivering reliable, efficient, and customer-focused solutions across India.</p>
             </div>
             <div class="footer-col links">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Awards</a></li>
-                    <li><a href="#">Career</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="career.html">Career</a></li>
                 </ul>
             </div>
             <div class="footer-col contact">
                 <h3>Contact Address</h3>
-                <p class="address">Office No 115, Plot No 84, Vardhaman Chamber, Wing B, Sector – 17, Vashi, Navi Mumbai – 400703</p>
+                <p class="address">Office No 115, Plot No 84, Vardhaman Chamber, Wing B, Sector – 17, Vashi, Navi Mumbai, Maharashtra – 400703</p>
                 <h3>Contact Person</h3>
                 <div class="contact-persons">
                     <div class="person">
@@ -189,50 +205,57 @@
 </footer>
 
 <script>
-    // ===== HAMBURGER MENU =====
-    function toggleMenu() {
-        const navLinks = document.getElementById('navLinks');
-        const hamburger = document.getElementById('hamburger');
-        const overlay = document.getElementById('menuOverlay');
+// ── MOBILE DRAWER ──────────────────────────────────────
+var drawer   = document.getElementById('mobileDrawer');
+var backdrop = document.getElementById('drawerBackdrop');
+var burger   = document.getElementById('hamburger');
+var closeBtn = document.getElementById('drawerClose');
 
-        navLinks.classList.toggle('open');
-        hamburger.classList.toggle('active');
-        overlay.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
-    }
+burger.addEventListener('click', function() {
+    drawer.classList.add('open');
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+});
 
-    function closeMenu() {
-        const navLinks = document.getElementById('navLinks');
-        const hamburger = document.getElementById('hamburger');
-        const overlay = document.getElementById('menuOverlay');
+function closeDrawer() {
+    drawer.classList.remove('open');
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+}
 
-        navLinks.classList.remove('open');
-        hamburger.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.classList.remove('menu-open');
-    }
+closeBtn.addEventListener('click', closeDrawer);
 
-    // ===== SLIDER =====
-    let currentIndex = 0;
-    const totalSlides = 2;
+// Anchor links inside drawer — close then scroll
+drawer.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = this.getAttribute('href');
+        closeDrawer();
+        setTimeout(function() {
+            var el = target === '#' ? document.body : document.querySelector(target);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+    });
+});
 
-    function moveSlider(direction) {
-        currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
-        updateSlider();
-    }
+// ── SLIDER ────────────────────────────────────────────
+var idx = 0, total = 2;
 
-    function currentSlide(index) {
-        currentIndex = index;
-        updateSlider();
-    }
-
-    function updateSlider() {
-        const track = document.getElementById('sliderTrack');
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
-        document.querySelectorAll('.dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentIndex);
-        });
-    }
+function moveSlider(dir) {
+    idx = (idx + dir + total) % total;
+    updateSlider();
+}
+function currentSlide(i) {
+    idx = i;
+    updateSlider();
+}
+function updateSlider() {
+    document.getElementById('sliderTrack').style.transform = 'translateX(-' + (idx * 100) + '%)';
+    document.querySelectorAll('.dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === idx);
+    });
+}
 </script>
+
 </body>
 </html>

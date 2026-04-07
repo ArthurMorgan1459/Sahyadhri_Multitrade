@@ -279,10 +279,9 @@ body.menu-open { overflow: hidden; }
     padding: 48px 44px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 28px;
     justify-content: center;
     text-align: center;
-    align-items: center;
 }
 
 .address-panel h2 {
@@ -315,7 +314,6 @@ body.menu-open { overflow: hidden; }
     display: flex;
     flex-direction: column;
     gap: 8px;
-    align-items: center;
 }
 
 .mail-label {
@@ -332,7 +330,6 @@ body.menu-open { overflow: hidden; }
     color: #444;
     font-size: 0.95rem;
     transition: color 0.25s;
-    justify-content: center;
 }
 .mail-link:hover { color: var(--navy); }
 .mail-link i { color: var(--navy); font-size: 1rem; }
@@ -343,7 +340,7 @@ body.menu-open { overflow: hidden; }
     gap: 14px;
 }
 
-.phone-item { display: flex; flex-direction: column; gap: 4px; align-items: center;}
+.phone-item { display: flex; flex-direction: column; gap: 4px; }
 
 .person-name {
     font-size: 0.9rem;
@@ -359,7 +356,6 @@ body.menu-open { overflow: hidden; }
     color: #444;
     font-size: 0.92rem;
     transition: color 0.25s;
-    justify-content: center;
 }
 .phone-link:hover { color: var(--navy); }
 .phone-link i { color: var(--navy); }
@@ -555,7 +551,7 @@ body.menu-open { overflow: hidden; }
         gap: 22px;
     }
 
-    .addr-phones { flex-direction: row; flex-wrap: wrap; gap: 18px; justify-content: center;}
+    .addr-phones { flex-direction: row; flex-wrap: wrap; gap: 18px; }
 
     .form-panel { padding: 32px 24px; gap: 18px; }
     .form-panel h2, .address-panel h2 { font-size: 1.6rem; }
