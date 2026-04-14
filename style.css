@@ -106,6 +106,23 @@ body {
 /* ========================
    NAVBAR
 ======================== */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
 .navbar-container {
     position: fixed;
     top: 0; left: 0;
@@ -698,7 +715,8 @@ body {
     border: 1px solid var(--border);
     border-radius: 8px;
     width: 100%;
-    padding: 24px 20px;
+    height: 90px;              /* fixed height on desktop too */
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -711,7 +729,10 @@ body {
     background: var(--bg3);
 }
 .logo-card img {
-    max-width: 140px; height: 55px;
+    max-width: 140px;
+    max-height: 55px;          /* logo fits inside, never stretches the box */
+    width: auto;
+    height: auto;
     object-fit: contain;
     opacity: 0.85;
     transition: opacity 0.3s;
@@ -956,6 +977,8 @@ body {
 ======================== */
 @media (max-width: 768px) {
     /* Navbar */
+    .logo img { height: 38px; }
+    .logo-name { font-size: 0.78rem; letter-spacing: 0.5px; }
     .navbar-container { padding: 14px 4%; }
     .navbar-container.scrolled { padding: 10px 4%; }
     .logo img { height: 46px; }
@@ -967,22 +990,69 @@ body {
     .drawer-backdrop.open { pointer-events: auto; }
 
     /* Hero */
-    .hero-section { height: auto; min-height: unset; padding-top: 80px; }
-    .hero-video { position: relative; width: 100%; height: auto; object-fit: unset; }
-    .hero-overlay { display: none; }
-    .hero-content { position: absolute; bottom: 8%; left: 0; right: 0; padding: 0 5%; max-width: 100%; }
-    .title-line { font-size: 3rem; }
-    .title-accent { font-size: 2rem; }
-    .hero-sub { font-size: 0.88rem; display: none; }
-    .hero-ctas { gap: 10px; }
-    .btn-primary, .btn-ghost { font-size: 0.82rem; padding: 11px 22px; }
+    .hero-section {
+        height: auto;
+        min-height: unset;
+        padding-top: 74px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    .hero-video {
+        position: relative;
+        width: 100%;
+        height: 52vw;
+        min-height: 220px;
+        object-fit: cover;
+        display: block;
+        z-index: 0;
+    }
+    .hero-overlay {
+        display: block;
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(14,36,60,0.55) 0%,
+            rgba(14,36,60,0.82) 100%
+        );
+        z-index: 1;
+    }
+    .hero-content {
+        position: absolute;
+        bottom: 0;
+        left: 0; right: 0;
+        z-index: 2;
+        padding: 0 4% 20px;
+        max-width: 100%;
+    }
+    .main-title {
+        font-size: 1.55rem;
+        line-height: 1.15;
+        margin-bottom: 12px;
+    }
+    .hero-accent { font-size: 1.55rem; }
+    .hero-sub { font-size: 0.82rem; display: block; margin-bottom: 14px; }
+    .hero-ctas { gap: 8px; }
+    .btn-primary, .btn-ghost { font-size: 0.78rem; padding: 9px 14px; }
     .hero-scroll-hint { display: none; }
 
-    /* Stats */
-    .stats-strip { padding: 20px 4%; }
+    /* Stats — all 3 in one row */
+    .stats-strip {
+        padding: 16px 2%;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+    }
     .stat-divider { display: none; }
-    .stat-item { flex: 0 0 50%; padding: 12px 10px; }
-    .stat-num { font-size: 2.4rem; }
+    .stat-item {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 8px 4px;
+        text-align: center;
+    }
+    .stat-num { font-size: 1.9rem; }
+    .stat-plus { font-size: 1.3rem; }
+    .stat-item p { font-size: 0.6rem; letter-spacing: 0.8px; }
 
     /* About */
     .about-section { padding: 60px 5%; }
@@ -1006,9 +1076,25 @@ body {
 
     /* Clients */
     .clients-section { padding: 60px 5%; }
-    .slide { grid-template-columns: repeat(2,1fr); gap: 10px; }
-    .logo-card { padding: 16px 12px; }
-    .logo-card img { height: 40px; }
+    .slide {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .logo-card {
+        padding: 0;
+        height: 80px;          /* fixed height regardless of logo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .logo-card img {
+        max-width: 110px;
+        max-height: 50px;      /* caps the logo height inside the box */
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        opacity: 0.85;
+    }
 
     /* Career */
     .career-content { padding: 60px 5%; max-width: 100%; }
@@ -1022,10 +1108,10 @@ body {
 }
 
 @media (max-width: 480px) {
-    .title-line { font-size: 2.4rem; }
-    .title-accent { font-size: 1.7rem; }
+    .main-title { font-size: 1.8rem; }
+    .hero-accent { font-size: 1.8rem; }
     .section-title { font-size: 1.9rem; }
-    .stat-item { flex: 0 0 50%; }
+    .stat-item { flex: 1 1 30%; }
     .services-grid { grid-template-columns: 1fr 1fr; }
     .grid-item img { height: 120px; }
 }
