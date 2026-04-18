@@ -91,28 +91,33 @@
             <h2 class="form-heading">Send Your <span class="accent">Application</span></h2>
             <div class="heading-bar"></div>
 
-            <form class="apply-form" onsubmit="handleSubmit(event)">
+            <form class="apply-form" id="careerForm" onsubmit="handleSubmit(event)">
+
                 <div class="form-row full">
-                    <input type="text" placeholder="Full Name" required>
+                    <input type="text" id="name" name="name" placeholder="Full Name" required>
                 </div>
                 <div class="form-row split">
-                    <input type="email" placeholder="Email ID" required>
-                    <input type="tel" placeholder="Mobile Number" required>
+                    <input type="email" id="email" name="email" placeholder="Email ID" required>
+                    <input type="tel" id="phone" name="phone" placeholder="Mobile Number" required>
                 </div>
                 <div class="form-row full">
-                    <input type="text" placeholder="Position / Role Applying For">
+                    <input type="text" id="position" name="position" placeholder="Position / Role Applying For">
                 </div>
                 <div class="form-row full">
-                    <textarea placeholder="Tell us about yourself..." rows="4"></textarea>
+                    <textarea name="message" id="message" placeholder="Tell us about yourself..." rows="4"></textarea>
                 </div>
                 <div class="form-row upload-row">
                     <span class="upload-text">Upload Resume</span>
                     <label class="file-btn" for="resumeInput">Choose File</label>
-                    <input type="file" id="resumeInput" accept=".pdf,.doc,.docx" onchange="showFileName(this)">
+                    <input type="file" id="resumeInput" name="attachment" accept=".pdf,.doc,.docx" onchange="showFileName(this)">
                     <span class="file-name" id="fileName">No file chosen</span>
                 </div>
+
+                <!-- Status messages -->
+                <div id="formStatus" style="display:none; margin-bottom: 12px; font-size: 14px; font-weight: 600; padding: 10px 16px; border-radius: 6px;"></div>
+
                 <div class="form-row full">
-                    <button type="submit" class="submit-btn">SUBMIT APPLICATION</button>
+                    <button type="submit" class="submit-btn" id="careerSubmitBtn">SUBMIT APPLICATION</button>
                 </div>
             </form>
         </div>
@@ -190,19 +195,76 @@ function showFileName(input) {
 }
 
 // Form submit
-function handleSubmit(e) {
+async function handleSubmit(e) {
     e.preventDefault();
-    var btn = e.target.querySelector('.submit-btn');
-    btn.textContent = '✓ Application Submitted!';
-    btn.classList.add('submitted');
+    var btn = document.getElementById('careerSubmitBtn');
+    var status = document.getElementById('formStatus');
+    var form = document.getElementById('careerForm');
+
+    // Validate file size — max 5MB
+    var resumeFile = document.getElementById('resumeInput').files[0];
+    if (resumeFile && resumeFile.size > 5 * 1024 * 1024) {
+        status.style.display = 'block';
+        status.style.background = '#f8d7da';
+        status.style.color = '#721c24';
+        status.textContent = '✗ Resume must be under 5MB. Please compress it and try again.';
+        return;
+    }
+
+    btn.textContent = 'Submitting...';
     btn.disabled = true;
-    setTimeout(function() {
+    status.style.display = 'none';
+
+    try {
+        // Build FormData — browser sets correct multipart headers automatically
+        var formData = new FormData();
+        formData.append('name',     document.getElementById('name').value);
+        formData.append('email',    document.getElementById('email').value);
+        formData.append('phone',    document.getElementById('phone').value);
+        formData.append('position', document.getElementById('position').value);
+        formData.append('message',  document.getElementById('message').value);
+        if (resumeFile) {
+            formData.append('resume', resumeFile);
+        }
+
+        // ← Change this URL to your Render URL after deployment
+        var API_URL = 'http://localhost:5000/api/career';
+
+        var response = await fetch(API_URL, {
+            method: 'POST',
+            body: formData
+            // DO NOT set Content-Type header — browser sets it automatically for FormData
+        });
+
+        var result = await response.json();
+
+        if (result.success) {
+            status.style.display = 'block';
+            status.style.background = '#d4edda';
+            status.style.color = '#155724';
+            status.textContent = '✓ Application submitted! We will review your profile and get in touch.';
+            btn.textContent = '✓ Application Submitted!';
+            btn.classList.add('submitted');
+            form.reset();
+            document.getElementById('fileName').textContent = 'No file chosen';
+            setTimeout(function() {
+                btn.textContent = 'SUBMIT APPLICATION';
+                btn.classList.remove('submitted');
+                btn.disabled = false;
+                status.style.display = 'none';
+            }, 4000);
+        } else {
+            throw new Error(result.message || 'Submission failed');
+        }
+
+    } catch (error) {
+        status.style.display = 'block';
+        status.style.background = '#f8d7da';
+        status.style.color = '#721c24';
+        status.textContent = '✗ Something went wrong. Please try again or email us directly.';
         btn.textContent = 'SUBMIT APPLICATION';
-        btn.classList.remove('submitted');
         btn.disabled = false;
-        e.target.reset();
-        document.getElementById('fileName').textContent = 'No file chosen';
-    }, 3500);
+    }
 }
 
 // GSAP
@@ -212,7 +274,6 @@ gsap.from('.hero-tag',   { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out',
 gsap.from('.hero-title', { y: 60, opacity: 0, duration: 1,   ease: 'power4.out', delay: 0.6 });
 gsap.from('.hero-desc',  { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.9 });
 gsap.from('.perk-item',  { scrollTrigger: { trigger: '.perks-strip', start: 'top 90%' }, y: 30, opacity: 0, duration: 0.6, ease: 'power3.out', stagger: 0.1 });
-gsap.from('.form-left',  { scrollTrigger: { trigger: '.form-wrapper', start: 'top 82%' }, x: -60, opacity: 0, duration: 0.9, ease: 'power3.out' });
 gsap.from('.form-right', { scrollTrigger: { trigger: '.form-wrapper', start: 'top 82%' }, x: 60,  opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.1 });
 gsap.from('.float-contact', { x: 80, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 1.2 });
 </script>
