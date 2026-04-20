@@ -16,11 +16,13 @@ app.use(express.json());
 
 // Routes
 const careerRoute = require('./routes/career');
+const contactRoute = require('./routes/contact');
 app.use('/api', careerRoute);
+app.use('/api', contactRoute);
 
 // Health check
 app.get('/', (req, res) => {
-    res.send('Sahyadhri Backend is running ✅');
+    res.send('Sahyadhri Backend Initialized sucessfully');
 });
 
 app.listen(PORT, () => {

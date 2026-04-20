@@ -127,24 +127,19 @@
             <div class="heading-bar"></div>
 
             <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
-                <!-- Web3Forms Access Key — replace YOUR_ACCESS_KEY_HERE with your actual key from web3forms.com -->
-                <input type="hidden" name="access_key" value="993ff382-e143-4a75-adf0-3fffa88351d3">
-                <input type="hidden" name="subject" value="New Contact Enquiry – Sahyadhri Multitrade">
-                <input type="hidden" name="from_name" value="Sahyadhri Website – Contact Form">
-                <input type="checkbox" name="botcheck" style="display:none;">
 
                 <div class="form-row full">
-                    <input type="text" name="name" placeholder="Full Name" required>
+                    <input type="text" id="name" name="name" placeholder="Full Name" required>
                 </div>
                 <div class="form-row split">
-                    <input type="tel" name="phone" placeholder="Mobile Number" required>
-                    <input type="email" name="email" placeholder="Email ID" required>
+                    <input type="tel" id="phone" name="phone" placeholder="Mobile Number" required>
+                    <input type="email" id="email" name="email" placeholder="Email ID" required>
                 </div>
                 <div class="form-row full">
-                    <input type="text" name="subject_type" placeholder="Subject / Enquiry Type">
+                    <input type="text" id="subject" name="subject" placeholder="Subject / Enquiry Type">
                 </div>
                 <div class="form-row full">
-                    <textarea name="message" placeholder="Your message..." rows="5"></textarea>
+                    <textarea id="message" name="message" placeholder="Your message..." rows="5"></textarea>
                 </div>
 
                 <!-- Status messages -->
@@ -169,11 +164,6 @@
                     <h2 class="f-title">SAHYADHRI MULTITRADE PVT. LTD.</h2>
                 </div>
                 <p class="f-desc">Trusted name in the scrap industry, providing reliable solutions for scrap sourcing, processing, and supply chain operations across India.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://wa.me/918108911104" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-                </div>
             </div>
             <div class="footer-col links">
                 <h3>Quick Links</h3>
@@ -228,21 +218,27 @@ async function handleSubmit(e) {
     var status = document.getElementById('formStatus');
     var form = document.getElementById('contactForm');
 
-    // Loading state
     btn.textContent = 'Sending...';
     btn.disabled = true;
     status.style.display = 'none';
 
     try {
-        var formData = new FormData(form);
-        var object = {};
-        formData.forEach(function(value, key) { object[key] = value; });
-        var json = JSON.stringify(object);
+        // JSON forma - no file is expected
+        var payload = {
+            name:    document.getElementById('name').value,
+            phone:   document.getElementById('phone').value,
+            email:   document.getElementById('email').value,
+            subject: document.getElementById('subject').value,
+            message: document.getElementById('message').value
+        };
 
-        var response = await fetch('https://api.web3forms.com/submit', {
+        // ← to be changed after deployment
+        var API_URL = 'http://localhost:5000/api/contact';
+
+        var response = await fetch(API_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: json
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
         });
 
         var result = await response.json();

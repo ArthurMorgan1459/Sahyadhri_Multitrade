@@ -157,9 +157,6 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-body);
 .f-logo { height: 48px; }
 .f-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; line-height: 1.2; color: var(--white); }
 .f-desc { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.6); margin-bottom: 18px; }
-.social-links { display: flex; gap: 12px; }
-.social-links a { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); font-size: 14px; text-decoration: none; transition: 0.3s; }
-.social-links a:hover { background: var(--yellow); color: var(--navy); border-color: var(--yellow); }
 .footer-col h3 { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--white); margin-bottom: 18px; }
 .footer-col h3 + h3 { margin-top: 20px; }
 .links ul { list-style: none; padding: 0; }
